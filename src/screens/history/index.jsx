@@ -1,5 +1,11 @@
 import React from "react";
+ import { History } from "../../screens/history/history";
+ import { Layout } from "../../layouts/main";
 
 export function HistoryScreen() {
-  return <h1>History Screen</h1>;
+  return (
+    <Layout>
+      <History />
+    </Layout>
+  )
 }

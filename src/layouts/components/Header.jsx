@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { Container, Content } from "../../components";
@@ -12,25 +13,97 @@ const Wrapper = styled.header`
   font-weight: bold;
 `;
 
-const WrapperHistory = styled.div`
-  width: 115px;
-  height: 14px;
-  left: 200.11px;
-  top: 5px;
+const Title = styled(Link)`
+  font-size: 24px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
 `;
 
-const WrapperProducts = styled.div`
-position: absolute;
-width: 143px;
-height: 14px;
-left: 471px;
-top: 27px;
+const LinkWrapper = styled(Link)`
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
 `;
+
+const HeaderLinks = styled.div`
+  margin-left: 80px;
+`;
+
+const HeaderLink = styled(LinkWrapper)`
+  padding: 16px 40px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 14px;
+`;
+
+const HeaderActions = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const ActionCart = styled(LinkWrapper)`
+  margin-right: 32px;
+`;
+
+const ActionLogin = styled(LinkWrapper)`
+  margin-left: 32px;
+`;
+
+
+const Separator = styled.span`
+  display: inline-flex;
+  width: 2px;
+  background: #fff;
+  height: 28px;
+`;
+
+const links = [
+  {
+    title: "Nuestra historia",
+    to: "/history",
+  },
+  {
+    title: "Nuestros productos",
+    to: "/store",
+  },
+];
 
 export const Header = () => (
   <Wrapper>
     <Container height={height}>
-      <Content align="center">SR. MING</Content>
+      <Content align="center">
+        <Title to="/">SR. MING</Title>
+        <HeaderLinks>
+          {links.map(({ title, to }, index) => (
+            <HeaderLink key={`header-${index}`} to={to}>
+              {title}
+            </HeaderLink>
+          ))}
+        </HeaderLinks>
+        <HeaderActions>
+          <ActionCart to="/cart">S/ 0.00</ActionCart>
+          <Separator />
+          <ActionLogin to="/oauth/login">Inicia sesión</ActionLogin>
+        </HeaderActions>
+      </Content>
     </Container>
   </Wrapper>
 );
