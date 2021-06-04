@@ -1,119 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Layout } from "../../layouts/main";
-import { Ofertas } from "../home/components/ofertas";
-import { Sidebar } from "./components/sidebar";
+import { Sidebar, Products } from "./components";
+import { collectionProductsDtoToModels, getProducts } from "./core";
 
-const ofertasList = [
-  {
-    id: 1,
-    image:
-      "https://www.recetasderechupete.com/wp-content/uploads/2016/03/arroz_chaufa.jpg?width=1200&enable=upscale",
-    category: "Familiar, promociones",
-    name: "Promo Verano Ming",
-    price: 65,
-    priceOld: 87,
-  },
-  {
-    id: 2,
-    image:
-      "https://www.recetasderechupete.com/wp-content/uploads/2016/03/arroz_chaufa.jpg?width=1200&enable=upscale",
-    category: "Bebidas, promociones",
-    name: "Té para 2",
-    price: 65,
-    priceOld: 87,
-  },
-  {
-    id: 3,
-    image:
-      "https://www.recetasderechupete.com/wp-content/uploads/2016/03/arroz_chaufa.jpg?width=1200&enable=upscale",
-    category: "Bebidas, promociones",
-    name: "El té de Ming",
-    price: 65,
-    priceOld: 87,
-  },
-  {
-    id: 4,
-    image:
-      "https://www.recetasderechupete.com/wp-content/uploads/2016/03/arroz_chaufa.jpg?width=1200&enable=upscale",
-    category: "Familiar, promociones",
-    name: "Promo Verano Ming",
-    price: 65,
-    priceOld: 87,
-  },
-  {
-    id: 5,
-    image:
-      "https://www.recetasderechupete.com/wp-content/uploads/2016/03/arroz_chaufa.jpg?width=1200&enable=upscale",
-    category: "Bebidas, promociones",
-    name: "Té para 2",
-    price: 65,
-    priceOld: 87,
-  },
-  {
-    id: 6,
-    image:
-      "https://www.recetasderechupete.com/wp-content/uploads/2016/03/arroz_chaufa.jpg?width=1200&enable=upscale",
-    category: "Bebidas, promociones",
-    name: "El té de Ming",
-    price: 65,
-    priceOld: 87,
-  },
-
-  {
-    id: 7,
-    image:
-      "https://www.recetasderechupete.com/wp-content/uploads/2016/03/arroz_chaufa.jpg?width=1200&enable=upscale",
-    category: "Familiar, promociones",
-    name: "Promo Verano Ming",
-    price: 65,
-    priceOld: 87,
-  },
-  {
-    id: 8,
-    image:
-      "https://www.recetasderechupete.com/wp-content/uploads/2016/03/arroz_chaufa.jpg?width=1200&enable=upscale",
-    category: "Bebidas, promociones",
-    name: "Té para 2",
-    price: 65,
-    priceOld: 87,
-  },
-  {
-    id: 9,
-    image:
-      "https://www.recetasderechupete.com/wp-content/uploads/2016/03/arroz_chaufa.jpg?width=1200&enable=upscale",
-    category: "Bebidas, promociones",
-    name: "El té de Ming",
-    price: 65,
-    priceOld: 87,
-  },
-];
-
-const ContainerStore = styled.div`
+const Content = styled.div`
   display: flex;
-`;
-
-const SidebarContent = styled.div`
-  width: 280px;
-  height: 678px;
-`;
-
-const StoreList = styled.div`
-  width: 960px;
-  height: 678px;
+  margin-top: 44px;
 `;
 
 export function StoreScreen() {
+  const [products, setProducts] = useState(undefined);
+  const [productsFilters, setProductsFilters] = useState(undefined);
+  const [category, setCategory] = useState(0);
+  const [name, setName] = useState("");
+
+  const getDefaultCategory = () => {
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.has("category")) return parseInt(query.get("category"));
+
+    return 0;
+  };
+
+  const callToProducts = async () => {
+    const response = await getProducts();
+
+    const products = collectionProductsDtoToModels(response);
+    const category = getDefaultCategory();
+
+    setProducts(products);
+    setCategory(category);
+    filterProducts(products, category);
+  };
+
+  function filterProducts(products, categoryId, name) {
+    if (!products) return;
+
+    let filterProducts;
+
+    if (categoryId)
+      filterProducts = products.filter((p) => p.categoryId === categoryId);
+    else filterProducts = [...products];
+
+    if (name) {
+      filterProducts = filterProducts.filter(
+        (p) => p.name.toLowerCase().indexOf(name.toLowerCase()) > -1
+      );
+    }
+
+    setProductsFilters(filterProducts);
+  }
+
+  function handleCategorySelected(categoryId) {
+    setCategory(categoryId);
+    filterProducts(products, categoryId, name);
+  }
+
+  function handleSearch(name) {
+    setName(name);
+    filterProducts(products, category, name);
+  }
+
+  useEffect(() => {
+    callToProducts();
+  }, []);
+
   return (
-    <Layout>
-      <ContainerStore>
-        <SidebarContent>
-          <Sidebar />
-        </SidebarContent>
-        <StoreList>
-          <Ofertas title="" products={ofertasList} />
-        </StoreList>
-      </ContainerStore>
+    <Layout showDelivery>
+      <Content>
+        <Sidebar
+          defaultCategory={category}
+          onCategorySelected={handleCategorySelected}
+          onSearch={handleSearch}
+        />
+        {productsFilters && <Products products={productsFilters} />}
+      </Content>
     </Layout>
   );
 }

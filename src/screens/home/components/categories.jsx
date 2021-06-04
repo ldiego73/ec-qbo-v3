@@ -35,50 +35,7 @@ const Title = styled.div`
   color: #283342;
 `;
 
-const categories = [
-  {
-    id: 1,
-    image: "https://ec-qbo.herokuapp.com/categories/promociones.svg",
-    title: "Promociones",
-  },
-  {
-    id: 2,
-    image: "https://ec-qbo.herokuapp.com/categories/dim-sum.svg",
-    title: "Dim Sum",
-  },
-  {
-    id: 3,
-    image: "https://ec-qbo.herokuapp.com/categories/sopas.svg",
-    title: "Sopas",
-  },
-  {
-    id: 4,
-    image: "https://ec-qbo.herokuapp.com/categories/bebidas.svg",
-    title: "Bebidas",
-  },
-  {
-    id: 5,
-    image: "https://ec-qbo.herokuapp.com/categories/platos-dulces.svg",
-    title: "Platos Dulces",
-  },
-  {
-    id: 6,
-    image: "https://ec-qbo.herokuapp.com/categories/platos-salados.svg",
-    title: "Platos Salados",
-  },
-  {
-    id: 7,
-    image: "https://ec-qbo.herokuapp.com/categories/a-la-carta.svg",
-    title: "A la Carta",
-  },
-  {
-    id: 8,
-    image: "https://ec-qbo.herokuapp.com/categories/familiar.svg",
-    title: "Familiar",
-  },
-];
-
-export function Categories() {
+export function Categories({ categories }) {
   const [category, setCategory] = useState(null);
 
   return (
@@ -96,7 +53,7 @@ export function Categories() {
           <Circle>
             <img src={item.image} alt={item.title} loading="lazy" />
           </Circle>
-          <Title>{item.title}</Title>
+          <Title>{item.name}</Title>
         </CategoryIcon>
       ))}
     </Wrapper>
