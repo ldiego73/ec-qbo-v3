@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Redirect } from "react-router";
 import styled from "styled-components";
 
 import { CardProduct } from "../../../components";
+import { EcommerceContext } from "../../../contexts";
 
 const OfertaContent = styled.div`
   display: flex;
@@ -41,13 +42,14 @@ const OfertaProducts = styled.div`
 export function Ofertas({ products, title }) {
   const [catalogoCompleto, setCatalogoCompleto] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const { addToCart } = useContext(EcommerceContext);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
   };
 
   const handleAddProduct = (product) => {
-    alert(product.name);
+    addToCart(product);
   };
 
   return (

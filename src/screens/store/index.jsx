@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useReducer } from "react";
 import styled from "styled-components";
 import { Layout } from "../../layouts/main";
 import { Sidebar, Products } from "./components";
-import { collectionProductsDtoToModels, getProducts } from "./core";
+import { useProducts } from "./hooks";
+import { reducer, initialState, StoreActions } from "./reducers";
 
 const Content = styled.div`
   display: flex;
@@ -10,71 +11,26 @@ const Content = styled.div`
 `;
 
 export function StoreScreen() {
-  const [products, setProducts] = useState(undefined);
-  const [productsFilters, setProductsFilters] = useState(undefined);
-  const [category, setCategory] = useState(0);
-  const [name, setName] = useState("");
-
-  const getDefaultCategory = () => {
-    const query = new URLSearchParams(window.location.search);
-
-    if (query.has("category")) return parseInt(query.get("category"));
-
-    return 0;
-  };
-
-  const callToProducts = async () => {
-    const response = await getProducts();
-
-    const products = collectionProductsDtoToModels(response);
-    const category = getDefaultCategory();
-
-    setProducts(products);
-    setCategory(category);
-    filterProducts(products, category);
-  };
-
-  function filterProducts(products, categoryId, name) {
-    if (!products) return;
-
-    let filterProducts;
-
-    if (categoryId)
-      filterProducts = products.filter((p) => p.categoryId === categoryId);
-    else filterProducts = [...products];
-
-    if (name) {
-      filterProducts = filterProducts.filter(
-        (p) => p.name.toLowerCase().indexOf(name.toLowerCase()) > -1
-      );
-    }
-
-    setProductsFilters(filterProducts);
-  }
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const products = useProducts(state.category, state.name);
 
   function handleCategorySelected(categoryId) {
-    setCategory(categoryId);
-    filterProducts(products, categoryId, name);
+    dispatch({ type: StoreActions.SelectCategory, category: categoryId });
   }
 
   function handleSearch(name) {
-    setName(name);
-    filterProducts(products, category, name);
+    dispatch({ type: StoreActions.SetName, name });
   }
-
-  useEffect(() => {
-    callToProducts();
-  }, []);
 
   return (
     <Layout showDelivery>
       <Content>
         <Sidebar
-          defaultCategory={category}
+          defaultCategory={state.category}
           onCategorySelected={handleCategorySelected}
           onSearch={handleSearch}
         />
-        {productsFilters && <Products products={productsFilters} />}
+        {products && <Products products={products} />}
       </Content>
     </Layout>
   );

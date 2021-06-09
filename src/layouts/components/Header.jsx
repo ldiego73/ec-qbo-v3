@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { Container, Content } from "../../components";
+import { EcommerceContext } from "../../contexts";
+import { formatCurrency } from "../../helpers";
 
 const height = 64;
 
@@ -67,7 +69,6 @@ const ActionLogin = styled(LinkWrapper)`
   margin-left: 32px;
 `;
 
-
 const Separator = styled.span`
   display: inline-flex;
   width: 2px;
@@ -86,24 +87,37 @@ const links = [
   },
 ];
 
-export const Header = () => (
-  <Wrapper>
-    <Container height={height}>
-      <Content align="center">
-        <Title to="/">SR. MING</Title>
-        <HeaderLinks>
-          {links.map(({ title, to }, index) => (
-            <HeaderLink key={`header-${index}`} to={to}>
-              {title}
-            </HeaderLink>
-          ))}
-        </HeaderLinks>
-        <HeaderActions>
-          <ActionCart to="/cart">S/ 0.00</ActionCart>
-          <Separator />
-          <ActionLogin to="/oauth/login">Inicia sesión</ActionLogin>
-        </HeaderActions>
-      </Content>
-    </Container>
-  </Wrapper>
-);
+export function Header() {
+  const { cart } = useContext(EcommerceContext);
+
+  function getTotal() {
+    const neto = cart.reduce(
+      (total, product) => total + product.price * product.quantity,
+      0
+    );
+
+    return formatCurrency(neto);
+  }
+
+  return (
+    <Wrapper>
+      <Container height={height}>
+        <Content align="center">
+          <Title to="/">SR. MING</Title>
+          <HeaderLinks>
+            {links.map(({ title, to }, index) => (
+              <HeaderLink key={`header-${index}`} to={to}>
+                {title}
+              </HeaderLink>
+            ))}
+          </HeaderLinks>
+          <HeaderActions>
+            <ActionCart to="/cart">{getTotal()}</ActionCart>
+            <Separator />
+            <ActionLogin to="/oauth/login">Inicia sesión</ActionLogin>
+          </HeaderActions>
+        </Content>
+      </Container>
+    </Wrapper>
+  );
+}

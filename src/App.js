@@ -2,12 +2,15 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import { Navigation } from "./screens/navigation";
+import { EcommerceProvider } from "./contexts";
 
 function App() {
   return (
-    <Router>
-      <Navigation />
-    </Router>
+    <EcommerceProvider>
+      <Router>
+        <Navigation />
+      </Router>
+    </EcommerceProvider>
   );
 }
 

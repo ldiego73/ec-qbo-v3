@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Redirect } from "react-router";
 import styled from "styled-components";
 import { CardProduct } from "../../../components";
+import { EcommerceContext } from "../../../contexts";
 
 const ProductsStyled = styled.div`
   display: flex;
@@ -18,31 +19,11 @@ const ProductRow = styled.div`
 
 export function Products({ products }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [productsRow, setProductsRow] = useState(null);
+  const { addToCart } = useContext(EcommerceContext);
 
-  function convertProductsToProductsRow(products) {
-    let filterProducts = [];
-    let i = 0;
-
-    products.forEach((product, index) => {
-      if (index % 3 === 0) {
-        filterProducts[i] = [];
-      }
-
-      filterProducts[i].push({
-        key: `product-${index}`,
-        product,
-      });
-
-      if (index % 3 === 2) i += 1;
-    });
-
-    setProductsRow(filterProducts);
+  function handleAddProduct(product) {
+    addToCart(product);
   }
-
-  useEffect(() => {
-    convertProductsToProductsRow(products);
-  }, [products]);
 
   if (selectedProduct)
     return (
@@ -55,8 +36,8 @@ export function Products({ products }) {
 
   return (
     <ProductsStyled>
-      {productsRow &&
-        productsRow.map((items, index) => (
+      {products &&
+        products.map((items, index) => (
           <ProductRow key={`product-row-${index}`}>
             {items.map(({ key, product }) => (
               <CardProduct
@@ -66,6 +47,7 @@ export function Products({ products }) {
                 height={241}
                 imageHeight={129}
                 onClick={() => setSelectedProduct(product)}
+                onAddProduct={() => handleAddProduct(product)}
               />
             ))}
           </ProductRow>
