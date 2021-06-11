@@ -21,10 +21,14 @@ export const Wrapper = styled.button`
   cursor: pointer;
 `;
 
-export const Button = ({ children, onClick }) => {
+export const Button = ({ type = "button", children, onClick }) => {
   const handleClick = () => {
     typeof onClick === "function" && onClick();
   };
 
-  return <Wrapper onClick={handleClick}>{children}</Wrapper>;
+  return (
+    <Wrapper type={type} onClick={handleClick}>
+      {children}
+    </Wrapper>
+  );
 };
