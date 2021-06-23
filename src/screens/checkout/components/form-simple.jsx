@@ -5,8 +5,6 @@ import {
   FormGroup,
   FormInput,
   FormLabel,
-  FormSelect,
-  FormTextArea,
   FieldError,
 } from "../styles";
 import { Button } from "../../../components";
@@ -23,7 +21,6 @@ export function CheckoutForm() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(data);
     nombresRef.current.focus();
   }
 

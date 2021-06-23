@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 import { CardProduct } from "../../../components";
@@ -44,11 +44,11 @@ export function Ofertas({ products, title }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { addToCart } = useContext(EcommerceContext);
 
-  const handleProductClick = (product) => {
+  const handleProductClick = product => {
     setSelectedProduct(product);
   };
 
-  const handleAddProduct = (product) => {
+  const handleAddProduct = product => {
     addToCart(product);
   };
 
@@ -67,6 +67,7 @@ export function Ofertas({ products, title }) {
       <OfertaProducts>
         {products.map((product, index) => (
           <CardProduct
+            key={`card-product-${index}`}
             product={product}
             onClick={handleProductClick}
             onAddProduct={handleAddProduct}

@@ -1,0 +1,72 @@
+extends:
+  - airbnb
+  - eslint:recommended
+  - plugin:react/recommended
+  - plugin:jsx-a11y/recommended
+  - prettier
+plugins:
+  - prettier
+  - react
+  - filenames
+  - jsx-a11y
+  - "simple-import-sort"
+parserOptions:
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+    es6: true
+    classes: true
+    modules: true
+env:
+  browser: true
+  es6: true
+  node: true
+  jest: true
+rules:
+  eqeqeq: 2
+  complexity: [0, 4]
+  import/first: 2
+  import/prefer-default-export: 0
+  max-len:
+    - "error"
+    - 90
+    - 1
+    - ignoreUrls: true
+      ignoreComments: false
+      ignoreRegExpLiterals: true
+      ignoreStrings: false
+      ignoreTemplateLiterals: false
+  no-console: 2
+  no-dupe-keys: 2
+  no-else-return: 2
+  no-empty: 0
+  no-eq-null: 0
+  no-extra-boolean-cast: 2
+  no-extra-semi: 2
+  no-mixed-spaces-and-tabs: 2
+  no-param-reassign: 2
+  no-redeclare: 2
+  no-underscore-dangle: 2
+  no-unreachable: 2
+  no-unused-expressions: 0
+  no-unused-vars: 2
+  no-useless-constructor: 2
+  no-useless-escape: 2
+  object-curly-spacing: [2, "always"]
+  object-shorthand:
+    - 2
+    - methods
+    - ignoreConstructors: true
+      avoidExplicitReturnArrows: true
+  prettier/prettier: ["error", { "semi": true }]
+  react/display-name: 0
+  react/jsx-filename-extension: 2
+  react/jsx-key: 2
+  react/jsx-props-no-spreading:
+    - 2
+    - html: "ignore"
+  react/no-array-index-key: 0
+  react/no-unescaped-entities: 0
+  react/prop-types: 0
+  react/react-in-jsx-scope: 0
+  use-isnan: 2

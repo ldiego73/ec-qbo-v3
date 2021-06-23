@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`

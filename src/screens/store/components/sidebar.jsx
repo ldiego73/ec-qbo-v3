@@ -86,7 +86,7 @@ export function Sidebar({ defaultCategory, onCategorySelected, onSearch }) {
     setCategories(collectionCategoriesDtoToModels(response));
   };
 
-  const handleSelectedCategory = (id) => {
+  const handleSelectedCategory = id => {
     if (selectedCategory === id) {
       setSelectedCategory(0);
       onCategorySelected(0);
@@ -112,12 +112,12 @@ export function Sidebar({ defaultCategory, onCategorySelected, onSearch }) {
         <SearchInput
           type="text"
           placeholder="Nombre del producto"
-          onChange={(event) => onSearch(event.target.value)}
+          onChange={event => onSearch(event.target.value)}
         />
       </Search>
       <Categories>
         {categories &&
-          categories.map((category) => (
+          categories.map(category => (
             <Category
               selected={selectedCategory === category.id}
               key={`category-${category.id}`}

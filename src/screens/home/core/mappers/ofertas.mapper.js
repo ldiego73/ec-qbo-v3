@@ -1,7 +1,9 @@
 /**
  * ENTITY => Representa un objeto del negocio o en mi tabla de BD
- * DTO => Representa el objeto de transferencia para obtener, procesar o enviar información.
- * MODEL => Representa un parte de la entidad, que mayormente es utilizado para la UI, Backend
+ * DTO => Representa el objeto de transferencia para obtener,
+ *        procesar o enviar información.
+ * MODEL => Representa un parte de la entidad,
+ *        que mayormente es utilizado para la UI, Backend
  */
 export function mapOfertasDtoToModel(dto) {
   return {
@@ -15,5 +17,5 @@ export function mapOfertasDtoToModel(dto) {
 }
 
 export function collectionOfertasDtoToModel(dto) {
-  return dto.map((item) => mapOfertasDtoToModel(item));
+  return dto.map(item => mapOfertasDtoToModel(item));
 }

@@ -282,7 +282,7 @@ export function CartScreen() {
                         max={100}
                         count={product.quantity}
                         wrapperStyle={CounterInputWrapperStyle}
-                        onCountChange={(count) =>
+                        onCountChange={count =>
                           handleChangeQuantity(product.id, count)
                         }
                       />

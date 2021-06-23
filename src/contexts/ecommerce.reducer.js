@@ -9,7 +9,7 @@ export const initialState = {
 
 function addProductToCart(state, product) {
   const cart = [...state.cart];
-  const matchedProduct = cart.findIndex((p) => p.id === product.id);
+  const matchedProduct = cart.findIndex(p => p.id === product.id);
 
   if (matchedProduct < 0) {
     cart.push({ ...product, quantity: 1 });
@@ -24,7 +24,7 @@ function addProductToCart(state, product) {
 
 function removeProductToCart(state, productId) {
   const cart = [...state.cart];
-  const matchedProduct = cart.findIndex((p) => p.id === productId);
+  const matchedProduct = cart.findIndex(p => p.id === productId);
 
   if (matchedProduct > -1) {
     cart[matchedProduct].quantity -= 1;
@@ -39,7 +39,7 @@ function removeProductToCart(state, productId) {
 
 function updateProductToCart(state, product) {
   const cart = [...state.cart];
-  const matchedProduct = cart.findIndex((p) => p.id === product.id);
+  const matchedProduct = cart.findIndex(p => p.id === product.id);
 
   if (matchedProduct > -1) {
     cart[matchedProduct] = { ...product };
@@ -52,7 +52,7 @@ function updateProductToCart(state, product) {
 
 function updateProductQuantityToCart(state, productId, quantity) {
   const cart = [...state.cart];
-  const matchedProduct = cart.findIndex((p) => p.id === productId);
+  const matchedProduct = cart.findIndex(p => p.id === productId);
 
   if (matchedProduct > -1) {
     cart[matchedProduct].quantity = quantity;

@@ -7,5 +7,5 @@ export function mapCategoryDtoToModel(dto) {
 }
 
 export function collectionCategoriesDtoToModels(dto) {
-  return dto.map((item) => mapCategoryDtoToModel(item));
+  return dto.map(item => mapCategoryDtoToModel(item));
 }

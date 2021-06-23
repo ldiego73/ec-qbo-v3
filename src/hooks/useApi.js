@@ -20,9 +20,9 @@ export function useApi(url, options = {}) {
         if (isNotAborted()) {
           setResponse(data);
         }
-      } catch (error) {
+      } catch (err) {
         if (isNotAborted()) {
-          setError(error);
+          setError(err);
         }
       } finally {
         if (isNotAborted()) {

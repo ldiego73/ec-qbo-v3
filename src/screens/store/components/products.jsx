@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { CardProduct } from "../../../components";
 import { EcommerceContext } from "../../../contexts";

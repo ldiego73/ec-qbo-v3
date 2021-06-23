@@ -12,7 +12,7 @@ export function HomeScreen() {
   const categories = useCategories();
 
   return (
-    <Layout showBanner showDelivery={true} minHeight={500}>
+    <Layout showBanner showDelivery minHeight={500}>
       {categories && <Categories categories={categories} />}
       <Separator />
       {ofertas && (

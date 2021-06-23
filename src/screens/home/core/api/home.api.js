@@ -8,7 +8,7 @@ export async function getBanners() {
   return data;
 }
 
-export async function getCategories() {
+export async function getHomeCategories() {
   const { data } = await api.get("/categories");
 
   return data;

@@ -67,7 +67,7 @@ export function ProductScreen() {
   const params = useParams();
 
   function isValidProductId() {
-    const invalid = isNaN(params.id);
+    const invalid = Number.isNaN(params.id);
 
     return !invalid;
   }
@@ -80,7 +80,7 @@ export function ProductScreen() {
         <ProductImage>
           <img
             src="https://www.recetasderechupete.com/wp-content/uploads/2016/03/arroz_chaufa.jpg?width=1200&enable=upscale"
-            title="Producto"
+            alt="Producto"
             loading="lazy"
           />
         </ProductImage>
