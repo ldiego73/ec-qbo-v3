@@ -21,13 +21,13 @@ export const Wrapper = styled.button`
   cursor: pointer;
 `;
 
-export const Button = ({ type = "button", children, onClick }) => {
+export const Button = ({ type = "button", testId, children, onClick }) => {
   const handleClick = () => {
     typeof onClick === "function" && onClick();
   };
 
   return (
-    <Wrapper type={type} onClick={handleClick}>
+    <Wrapper type={type} onClick={handleClick} data-testid={testId || "button"}>
       {children}
     </Wrapper>
   );

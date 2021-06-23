@@ -31,3 +31,14 @@ store
 cart
 checkout
 not-found
+
+# Test
+
+Applicación
+    - Pruebas, cumplan como minimo el 80% de cobertura
+    - Las pruebas se encuentren dentro de la carpeta test, en la raiz del proyecto
+Librerias, SDKs
+    - se recomienda el 100% de cobertura
+    - Deben ir a la misma posición que he creado mi proyecto
+    - Excepción: Si tu proyecto tiene más de 10 mil lineas de código o 30 archivos, es mejor tenerlo en una carpeta test
+

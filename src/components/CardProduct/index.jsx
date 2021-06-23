@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Button } from "../Button";
+import { formatCurrency } from "../../helpers/currency.helper";
 
 const Wrapper = styled.div`
   display: flex;
@@ -83,8 +84,9 @@ export function CardProduct({
   };
 
   return (
-    <Wrapper width={width} height={height}>
+    <Wrapper data-testid="card-product-cmp" width={width} height={height}>
       <Image
+        data-testid="card-product"
         src={product.image}
         loading="lazy"
         width={width}
@@ -93,11 +95,13 @@ export function CardProduct({
       />
       <Header>
         <HeaderTitle>{product.category}</HeaderTitle>
-        {product.priceOld && <PriceOld>S/. {product.priceOld}</PriceOld>}
+        {product.priceOld && (
+          <PriceOld>{formatCurrency(product.priceOld)}</PriceOld>
+        )}
       </Header>
       <Body>
         <BodyTitle>{product.name}</BodyTitle>
-        <Price>S/. {product.price}</Price>
+        <Price>{formatCurrency(product.price)}</Price>
       </Body>
       <Footer>
         <Button onClick={handleAddProduct}>Agregar</Button>
