@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: lint-report
-          path: reports/eslint.html
+          path: reports/linters
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v1

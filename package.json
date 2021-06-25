@@ -22,7 +22,7 @@
   "scripts": {
     "lint:fix": "eslint src --fix",
     "lint:console": "eslint src -f stylish",
-    "lint:report": "eslint src -f html -o reports/eslint.html",
+    "lint:report": "eslint src -f html -o reports/linters/eslint.html",
     "prestart": "yarn lint:console",
     "start": "react-scripts start",
     "prebuild": "yarn lint:console",
