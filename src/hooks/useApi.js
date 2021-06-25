@@ -1,3 +1,4 @@
+// import axios from "axios";
 import { useEffect, useState } from "react";
 import { api } from "../api";
 
@@ -12,19 +13,23 @@ export function useApi(url, options = {}) {
     const isNotAborted = () => !signal.aborted;
 
     const doFetch = async () => {
+      // istanbul ignore else
       if (isNotAborted()) setLoading(true);
 
       try {
         const { data } = await api.get(url, options);
 
+        // istanbul ignore else
         if (isNotAborted()) {
           setResponse(data);
         }
       } catch (err) {
+        // istanbul ignore else
         if (isNotAborted()) {
           setError(err);
         }
       } finally {
+        // istanbul ignore else
         if (isNotAborted()) {
           setLoading(false);
         }
