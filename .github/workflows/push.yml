@@ -5,19 +5,19 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  Deploy-Github-Actions:
     runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        persist-credentials: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: "14.x"
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
 
-    - name: Install dependencies
-      run: yarn --frozen-lockfile
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
