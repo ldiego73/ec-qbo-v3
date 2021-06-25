@@ -29,3 +29,22 @@ jobs:
         env:
           SKIP_PREFLIGHT_CHECK: true
         run: yarn build
+
+      - name: Archive test results
+        uses: actions/upload-artifact@v1
+        with:
+          name: test-report
+          path: reports/test
+
+      - name: Archive linter
+        uses: actions/upload-artifact@v1
+        with:
+          name: lint-report
+          path: reports/eslint.html
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v1
+        with:
+          name: coverage-report
+          path: reports/coverage
+
