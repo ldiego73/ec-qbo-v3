@@ -4,7 +4,7 @@ export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const UPDATE_QUANTITY_PRODUCT = "UPDATE_QUANTITY_PRODUCT";
 
 export const initialState = {
-  cart: JSON.parse(localStorage.getItem("cart") || []),
+  cart: JSON.parse(localStorage.getItem("cart") || "[]"),
 };
 
 function addProductToCart(state, product) {
